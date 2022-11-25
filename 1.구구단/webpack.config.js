@@ -1,5 +1,5 @@
 const path = require("path");
-const webpack = require("webpack");
+const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 module.exports = {
   mode: "development",
   devtool: "eval", // hidden-soruce-map
@@ -28,13 +28,23 @@ module.exports = {
             ],
             "@babel/preset-react",
           ],
-          plugins: [],
+          plugins: [
+            "@babel/plugin-proposal-class-properties",
+            "react-refresh/babel",
+          ],
         },
       },
     ],
   },
+  plugins: [new RefreshWebpackPlugin()],
   output: {
     filename: "app.js",
     path: path.join(__dirname, "dist"),
+  },
+
+  devServer: {
+    devMiddleware: { publicPath: "/dist" },
+    static: { directory: path.resolve(__dirname) },
+    hot: true,
   },
 };
