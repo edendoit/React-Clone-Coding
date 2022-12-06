@@ -25,7 +25,7 @@ const GuGuDan = () => {
   return (
     <>
       <div>
-        {first} 곱하기 {second}는?
+        {first} x {second}는?
       </div>
       <form onSubmit={onSubmitForm}>
         <input

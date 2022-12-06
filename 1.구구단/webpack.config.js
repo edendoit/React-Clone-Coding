@@ -2,7 +2,7 @@ const path = require("path");
 const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 module.exports = {
   mode: "development",
-  devtool: "eval", // hidden-soruce-map
+  devtool: "eval", // product 일때는 -> hidden-soruce-map
   resolve: {
     extensions: [".jsx", "js"],
   },
