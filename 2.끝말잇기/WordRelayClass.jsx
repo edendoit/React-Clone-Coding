@@ -1,3 +1,4 @@
+import React, { createRef } from "react";
 const React = require("react");
 const { Component } = React;
 
@@ -15,24 +16,20 @@ class WordRelay extends Component {
         word: this.state.value,
         value: "",
       });
-      this.input.focus();
+      this.input.current.focus();
     } else {
       this.setState({
         result: "땡",
         value: "",
       });
-      this.input.focus();
+      this.input.current.focus();
     }
   };
 
   onChangeInput = (e) => {
     this.setState({ value: e.target.value });
   };
-  input;
-
-  onRefInput = (c) => {
-    this.input = c;
-  };
+  input = createRef();
 
   render() {
     return (
@@ -40,7 +37,7 @@ class WordRelay extends Component {
         <div>{this.state.word}</div>
         <form onSubmit={this.onSubmitForm}>
           <input
-            ref={this.onRefInput}
+            ref={this.input}
             value={this.state.value}
             onChange={this.onChangeInput}
           />
