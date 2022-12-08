@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback, useMemo } from "react";
 
 const ResponseCheck = () => {
   const [state, setState] = useState("waiting");
-  const [messeage, setMessage] = useState("Click to Start");
+  const [message, setMessage] = useState("Click to Start");
   const [result, setResult] = useState([]);
   const timeout = useRef(null);
   const startTime = useRef(0);
@@ -29,19 +29,14 @@ const ResponseCheck = () => {
       setState("waiting");
       setMessage("클릭해서 시작하세요.");
       setResult((prevResult) => {
-        [...prevResult, endTime.current, startTime.current];
+        return [...prevResult, endTime.current - startTime.current];
       });
     }
   }, [state]);
+
   const onReset = useCallback(() => {
     setResult([]);
   }, []);
-
-  onReset = () => {
-    setState({
-      result: [],
-    });
-  };
 
   const renderAverage = () => {
     return result.length === 0 ? null : (
