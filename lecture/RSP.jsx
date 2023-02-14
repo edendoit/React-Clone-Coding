@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 // client에서 rendering 되는 순간
 // 클래스의 경우 -> constructor -> rendering -> ref -> componentDidMount -> 화면 보임
@@ -6,6 +8,72 @@ import React, { Component } from "react";
 // -> render -> componentDidUpdate
 // 부모가 나를 없앴을 때 -> componentWillUnmount -> 소멸
 
+// const RSP = () => {
+//   const [result, setResult] = useState('');
+//   const [imgCoord, setImgCorrd] = useState(rspCoords.바위);
+//   const [score, setScore] = useState(0);
+//   const interval = useRef();
+
+//   useEffect(()=>{ // componentDidMount, componentDidUpdate
+//     interval.current = setInterval(changeHand, 100);
+//     return () => { // componentWillUnmount
+//       clearInterval(setInterval);
+//     }
+
+//   })
+
+//   const changeHand = () => {
+//     const { imgCoord } = this.state;
+//     this.interval = setInterval(() => {
+//       if ((imgCoord = rspCoords.바위)) {
+//         this.setState({
+//           imgCoord: rspCoords.가위,
+//         });
+//       } else if (imgCoord == rspCoords.가위) {
+//         this.setState({
+//           imgCoord: rspCoords.보,
+//         });
+//       } else if (imgCoord == rspCoords.보) {
+//         this.setState({
+//           imgCoord: rspCoords.바위,
+//         });
+//       }
+//     }, 1000);
+//   };
+
+//   const onClickBtn = (choice) => () => {
+//     const { imgCoord } = this.state;
+//     clearInterval(this.interval);
+//     const myScore = scores[choice];
+//     const cpuScore = scores[computerChoice(imgCoord)];
+//     const diff = myScore - cpuScore;
+//     if (diff === 0) {
+//       this.setState({
+//         result: "비겼습니다!",
+//       });
+//     } else if ([-1, 2].includes(diff)) {
+//       this.setState((prevState) => {
+//         return {
+//           result: "이겼습니다!",
+//           score: prevState.score + 1,
+//         };
+//       });
+//     } else {
+//       this.setState((prevState) => {
+//         return {
+//           result: "졌습니다!",
+//           score: prevState.score - 1,
+//         };
+//       });
+//     }
+//     setTimeout(() => {
+//       this.interval = setInterval(this.changeHand, 100);
+//     }, 1000);
+//   };
+//   return (
+
+//   )
+// }
 const rspCoords = {
   바위: "0",
   가위: "-142px",
