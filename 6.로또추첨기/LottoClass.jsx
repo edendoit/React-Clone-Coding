@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Ball from "./Ball";
 
 function getWinNumbers() {
@@ -17,6 +17,7 @@ function getWinNumbers() {
   const winNumbers = shuffle.slice(0, 6).sort((p, c) => p - c);
   return [...winNumbers, bonusNumber];
 }
+
 class Lotto extends Component {
   state = {
     winNumbers: getWinNumbers(), // 당첨 숫자들
@@ -29,7 +30,7 @@ class Lotto extends Component {
 
   runTimeouts = () => {
     const { winNumbers } = this.state;
-    for (let i = 0; i < this.state.winNumbers.length - 1; i++) {
+    for (let i = 0; i < winNumbers.length - 1; i++) {
       this.timeouts[i] = setTimeout(() => {
         this.setState((prevState) => {
           return {
@@ -48,6 +49,12 @@ class Lotto extends Component {
     }, 7000);
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.timeouts.length === 0) {
+      this.runTimeouts();
+    }
+  }
+
   componentDidMount() {
     console.log("didMount");
     this.runTimeouts();
@@ -59,6 +66,16 @@ class Lotto extends Component {
       clearTimeout(v);
     });
   }
+
+  onClickRedo = () => {
+    this.setState({
+      winBalls: [],
+      bonus: null,
+      redo: false,
+    });
+    this.timeouts = [];
+  };
+
   render() {
     const { winBalls, bonus, redo } = this.state;
     return (
